@@ -222,9 +222,16 @@ Resolve the project root and absolute paths, then find a Chromium-family browser
 
 ```bash
 # bash (macOS/Linux)
-ROOT=$(pwd); mkdir -p "docs/status/reports"
+ROOT=$(pwd)
+# Fix Git Bash on Windows: /d/path → D:/path (Chrome needs Windows-native paths)
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "mingw"* ]]; then ROOT=$(cygpath -m "$ROOT"); fi
+mkdir -p "docs/status/reports"
 PDF="$ROOT/docs/status/reports/$DATE-status.pdf"
-HTML="file://$ROOT/docs/status/.tmp/$DATE/index.html"
+# Build a correct file:// URL (needs file:///... regardless of platform)
+case "$ROOT" in
+  /*) HTML="file://$ROOT/docs/status/.tmp/$DATE/index.html" ;;   # Unix: /home/→file:///home/
+  *)  HTML="file:///$ROOT/docs/status/.tmp/$DATE/index.html" ;;  # Windows: D:/→file:///D:/
+esac
 BROWSER=""
 for c in google-chrome google-chrome-stable chromium chromium-browser microsoft-edge brave-browser; do
   command -v "$c" >/dev/null 2>&1 && { BROWSER="$c"; break; }
