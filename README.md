@@ -13,7 +13,7 @@ One template, one config field — the same report renders left-to-right or righ
 ## Install
 
 ```
-/plugin marketplace add OneStudio/status-reporter      # or a local path to this folder
+/plugin marketplace add onestudio-exp/status-reporter   # or a local path to this folder
 /plugin install status-reporter@status-reporter
 ```
 
