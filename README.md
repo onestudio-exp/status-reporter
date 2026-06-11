@@ -17,19 +17,19 @@ One template, one config field — the same report renders left-to-right or righ
 /plugin install status-reporter@status-reporter
 ```
 
-Then in any project: `/status-log` during sessions, `/status-export` at day's end.
+Then in any project: `/status-reporter:log` during sessions, `/status-reporter:export` at day's end.
 
 | Command | Role |
 |---|---|
-| `/status-log [note]` | **Capture** — append the current session's delivered work as a standalone, append-only fragment under `docs/status/days/_fragments/<DATE>/<HHMM>.md`. Run it any number of times per day; sessions never collide. |
-| `/status-export [YYYY-MM-DD]` | **Generate** — merge + de-duplicate + polish all of the day's fragments (and any existing day file) into one day file, render it through a fixed HTML template, and produce a professional landscape A4 **PDF** at `docs/status/reports/<DATE>-status.pdf`. |
+| `/status-reporter:log [note]` | **Capture** — append the current session's delivered work as a standalone, append-only fragment under `docs/status/days/_fragments/<DATE>/<HHMM>.md`. Run it any number of times per day; sessions never collide. |
+| `/status-reporter:export [YYYY-MM-DD]` | **Generate** — merge + de-duplicate + polish all of the day's fragments (and any existing day file) into one day file, render it through a fixed HTML template, and produce a professional landscape A4 **PDF** at `docs/status/reports/<DATE>-status.pdf`. |
 
 ## Design
 
 - **Capture is cheap and frequent; generation is heavy and once.** This is the split that solves the "multiple sessions in one day" pain — fragments are append-only and merged at export time.
 - **Cross-platform (Windows / macOS / Linux).** File work uses Claude's native Read/Write/Glob tools; the few genuine shell steps (date, render, archive) ship in both bash and PowerShell. The PDF is rendered by a **headless Chromium-family browser via its CLI** (`--headless --print-to-pdf`) — **no static server, no MCP server required, no `php`**. A Playwright MCP, if installed, is used only as a fallback when no browser binary is found.
 - **No messaging side-channels.** The plugin only writes inside `docs/status/`. (The original TaxFlow version pushed the PDF to WhatsApp; that coupling was removed.)
-- **Per-project name + language via a one-time config.** On the first `/status-export` in a project, you're asked for the **project name** and the **default language** (`ar` / `en`); the answer is saved to `docs/status/config.json` and reused silently afterwards. Edit that file anytime to rename the project or switch language. Language drives the PDF chrome direction (RTL/LTR), the language Claude writes the content in, and the scope-filter table.
+- **Per-project name + language via a one-time config.** On the first `/status-reporter:export` in a project, you're asked for the **project name** and the **default language** (`ar` / `en`); the answer is saved to `docs/status/config.json` and reused silently afterwards. Edit that file anytime to rename the project or switch language. Language drives the PDF chrome direction (RTL/LTR), the language Claude writes the content in, and the scope-filter table.
 
   ```json
   { "project_name": "My Project", "subtitle": "Daily status report", "language": "en" }

@@ -1,10 +1,10 @@
 ---
-description: Generate a professional daily status report as a PDF from a fixed HTML template. Usage: /status-export [YYYY-MM-DD]
+description: Generate a professional daily status report as a PDF from a fixed HTML template. Usage: /status-reporter:export [YYYY-MM-DD]
 argument-hint: [YYYY-MM-DD] | (empty for today)
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion, TodoWrite, mcp__playwright__browser_navigate, mcp__playwright__browser_run_code_unsafe, mcp__playwright__browser_close, mcp__plugin_playwright_playwright__browser_navigate, mcp__plugin_playwright_playwright__browser_run_code_unsafe, mcp__plugin_playwright_playwright__browser_close
 ---
 
-# /status-export — professional daily status report (PDF)
+# /status-reporter:export — professional daily status report (PDF)
 
 Produces a single PDF report for a given day, using one fixed template you must not deviate from.
 **Input:** the daily Markdown file `docs/status/days/<DATE>.md` (+ session fragments).
@@ -141,7 +141,7 @@ Handle by case:
 Use `AskUserQuestion` (one question if possible) to request the day's title, a summary, and the
 achievements list (the user writes it as multi-line Markdown).
 
-> Suggest instead that the user run `/status-log` in future sessions so it consolidates automatically.
+> Suggest instead that the user run `/status-reporter:log` in future sessions so it consolidates automatically.
 
 ### Day file format (cases a and c)
 

@@ -1,13 +1,13 @@
 ---
-description: Capture the current session's delivered work as an append-only daily fragment for /status-export to consolidate later. Usage: /status-log [optional note]
+description: Capture the current session's delivered work as an append-only daily fragment for /status-reporter:export to consolidate later. Usage: /status-reporter:log [optional note]
 argument-hint: [optional short note]
 allowed-tools: Read, Write, Glob, Bash
 ---
 
-# /status-log — capture this session's work (lightweight)
+# /status-reporter:log — capture this session's work (lightweight)
 
 Records what **this specific session** delivered into a separate, append-only fragment file,
-so multiple sessions in the same day accumulate without conflict. `/status-export` later
+so multiple sessions in the same day accumulate without conflict. `/status-reporter:export` later
 merges and polishes them into a single report.
 
 - **Input:** this session's conversation context + `$ARGUMENTS` (an optional short note).
@@ -16,7 +16,7 @@ merges and polishes them into a single report.
 
 > **When to use it?** At the end of each work session (or whenever you've delivered something worth recording).
 > Run it as many times a day as you like — each run is a separate file that never overwrites another and never
-> conflicts with a parallel session. `/status-export` removes duplicates when it consolidates.
+> conflicts with a parallel session. `/status-reporter:export` removes duplicates when it consolidates.
 
 ---
 
@@ -46,7 +46,7 @@ Use this date. Do not ask the user for the date. Everything else in this command
 
 **Language:** read `docs/status/config.json` if present and use its `language` field (`ar`/`en`) for the
 fragment's written language. If no config exists, default to `ar` and do **not** prompt the user — this is a
-lightweight command; project setup happens in `/status-export`.
+lightweight command; project setup happens in `/status-reporter:export`.
 
 Review this session's conversation from the start and extract **what was actually delivered** in it —
 not what's planned, not what was done in a previous session.
@@ -55,7 +55,7 @@ Write **1–4 themes**, each a `## heading` followed by 2–5 bullets. Rules:
 
 - **Value, not tooling** — write what the user/client can now do, not package or code names.
 - **This session only** — if the session delivered nothing notable, say so plainly and don't invent themes.
-- **Apply the scope filters** (same as Step 3 in `/status-export`) now, so the fragment comes out clean.
+- **Apply the scope filters** (same as Step 3 in `/status-reporter:export`) now, so the fragment comes out clean.
   The table depends on the language:
 
 **Arabic (`ar`):**
@@ -112,7 +112,7 @@ note: "<$ARGUMENTS if present, otherwise omit this line>"
 ```
 Session logged → _fragments/<DATE>/<TIME>.md  (<theme count> themes · <bullet count> bullets)
 Today's fragments: <number of files in today's folder>
-Run /status-export to generate the consolidated daily report.
+Run /status-reporter:export to generate the consolidated daily report.
 ```
 
 ---
@@ -120,8 +120,8 @@ Run /status-export to generate the consolidated daily report.
 ## Hard rules
 
 1. **Append-only** — never overwrite, delete, or edit an existing fragment. Each run is a new file.
-2. **No PDF, no template, no images** — this command is capture only; rendering is `/status-export`'s job.
-3. **Don't touch the consolidated `<DATE>.md`** — consolidation happens in `/status-export`, not here.
+2. **No PDF, no template, no images** — this command is capture only; rendering is `/status-reporter:export`'s job.
+3. **Don't touch the consolidated `<DATE>.md`** — consolidation happens in `/status-reporter:export`, not here.
 4. **This session only** — don't pull from previous sessions or from older day files.
 5. **Scope neutrality** — apply the filters above; when in doubt, flag the user instead of inventing.
 
