@@ -1,0 +1,15 @@
+# Stray test fixtures / render scratch (never part of the plugin)
+_smoke*/
+_clitest/
+_e2e/
+.playwright-mcp/
+
+# Generated status data belongs to consuming projects, not this plugin repo
+docs/status/.tmp/
+docs/status/reports/
+docs/status/days/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log

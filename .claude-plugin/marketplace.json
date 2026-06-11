@@ -1,0 +1,25 @@
+{
+  "name": "status-reporter",
+  "owner": {
+    "name": "OneStudio"
+  },
+  "description": "Local-development marketplace for status-reporter — a two-command daily status reporting plugin (capture fragments → render one polished PDF). Single-plugin marketplace.",
+  "plugins": [
+    {
+      "name": "status-reporter",
+      "source": "./",
+      "version": "1.0.0",
+      "description": "Two-step daily status reporting: /status-log captures each session as an append-only fragment; /status-export merges/de-duplicates/polishes all fragments into one professional bilingual (en/ar) PDF via a fixed HTML template. Cross-platform; renders with a headless Chromium browser CLI (no MCP required); no messaging side-channels.",
+      "keywords": [
+        "status",
+        "report",
+        "pdf",
+        "daily",
+        "standup",
+        "changelog",
+        "arabic",
+        "bilingual"
+      ]
+    }
+  ]
+}

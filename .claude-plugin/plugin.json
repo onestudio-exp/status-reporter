@@ -1,0 +1,21 @@
+{
+  "name": "status-reporter",
+  "version": "1.0.0",
+  "description": "Two-step daily status reporting. /status-log captures each work session as an append-only fragment; /status-export merges, de-duplicates, polishes, and renders a single professional bilingual (en/ar) PDF via a fixed HTML template. Cross-platform (Windows/macOS/Linux); renders with a headless Chromium browser CLI — no MCP server required. No external messaging dependencies — the report is produced locally.",
+  "author": {
+    "name": "OneStudio"
+  },
+  "license": "MIT",
+  "keywords": [
+    "status",
+    "report",
+    "pdf",
+    "daily",
+    "standup",
+    "changelog",
+    "arabic",
+    "bilingual",
+    "rtl",
+    "cross-platform"
+  ]
+}
